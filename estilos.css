@@ -1,0 +1,91 @@
+:root {
+  --fondo: #0e0e12;
+  --panel: #17171d;
+  --panel-2: #202029;
+  --borde: #2b2b36;
+  --texto: #ececf1;
+  --tenue: #8c8c9c;
+  --acento: #7c3aed;
+  --acento-2: #a78bfa;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: 'Manrope', system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+/* ---------- Barra superior ---------- */
+.barra { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; background: var(--panel); border-bottom: 1px solid var(--borde); gap: 12px; }
+.marca { font-weight: 800; font-size: 1.05rem; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.marca em { font-style: normal; color: var(--acento-2); }
+.logo { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: linear-gradient(135deg, var(--acento), #ec4899); }
+.acciones { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.acciones button, .boton-archivo { background: var(--panel-2); border: 1px solid var(--borde); border-radius: 9px; padding: 7px 12px; font-size: .85rem; font-weight: 600; cursor: pointer; }
+.acciones button:hover, .boton-archivo:hover { border-color: #3d3d4c; }
+.acciones .principal { background: var(--acento); border-color: var(--acento); }
+.separador { width: 1px; height: 22px; background: var(--borde); margin: 0 4px; }
+
+/* ---------- Espacio de trabajo ---------- */
+.espacio { flex: 1; display: grid; grid-template-columns: 60px 1fr 260px; min-height: 0; }
+
+.herramientas { background: var(--panel); border-right: 1px solid var(--borde); display: flex; flex-direction: column; gap: 4px; padding: 10px 8px; }
+.herramientas button { width: 44px; height: 44px; border: 0; border-radius: 10px; background: none; font-size: 1.15rem; font-weight: 700; }
+.herramientas button:hover { background: var(--panel-2); }
+.herramientas button.activa { background: var(--acento); box-shadow: 0 6px 18px rgba(124, 58, 237, .4); }
+
+.area { position: relative; display: grid; place-items: center; padding: 20px; overflow: auto; background: radial-gradient(circle at 50% 40%, #1c1c25, #0b0b0f); }
+.lienzos { position: relative; width: min(100%, 1000px); aspect-ratio: 1000 / 640; box-shadow: 0 24px 70px rgba(0, 0, 0, .65); border-radius: 6px; overflow: hidden; }
+.lienzos canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
+#lienzo { background: #fff; }
+#vista { cursor: crosshair; }
+.soltar { position: absolute; inset: 12px; border: 2px dashed var(--acento-2); border-radius: 14px; display: none; place-items: center; font-weight: 700; color: var(--acento-2); background: rgba(124, 58, 237, .12); pointer-events: none; }
+.area.arrastrando .soltar { display: grid; }
+
+.editor-texto { position: absolute; background: rgba(255, 255, 255, .85); border: 1px dashed var(--acento); outline: none; padding: 0 2px; min-width: 40px; font-family: 'Manrope', sans-serif; line-height: 1.15; }
+
+/* ---------- Propiedades ---------- */
+.propiedades { background: var(--panel); border-left: 1px solid var(--borde); padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 22px; }
+.propiedades h3 { margin: 0 0 10px; font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--tenue); }
+.color-actual { display: flex; align-items: center; gap: 10px; }
+.color-actual input { width: 46px; height: 46px; border: 0; padding: 0; background: none; cursor: pointer; }
+.color-actual code { font-size: .9rem; color: var(--tenue); }
+.paleta { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; margin-top: 10px; }
+.paleta button { aspect-ratio: 1; border-radius: 6px; border: 1px solid rgba(255, 255, 255, .12); padding: 0; }
+.paleta button:hover { transform: scale(1.12); }
+
+label span { display: flex; justify-content: space-between; font-size: .85rem; color: var(--tenue); margin-bottom: 6px; }
+label b { color: var(--texto); font-weight: 600; }
+label + label { display: block; margin-top: 12px; }
+input[type=range] { width: 100%; accent-color: var(--acento); }
+.interruptor { display: flex !important; align-items: center; gap: 8px; font-size: .88rem; cursor: pointer; }
+.interruptor input { accent-color: var(--acento); }
+
+.filtros { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.filtros button { background: var(--panel-2); border: 1px solid var(--borde); border-radius: 8px; padding: 8px 6px; font-size: .78rem; font-weight: 600; }
+.filtros button:hover { border-color: var(--acento); }
+
+.atajos { font-size: .75rem; color: var(--tenue); line-height: 1.9; margin: auto 0 0; }
+kbd { background: var(--panel-2); border: 1px solid var(--borde); border-radius: 4px; padding: 0 5px; font-family: inherit; font-size: .7rem; }
+
+/* ---------- Barra de estado ---------- */
+.estado { display: flex; gap: 22px; padding: 6px 16px; font-size: .78rem; color: var(--tenue); background: var(--panel); border-top: 1px solid var(--borde); }
+.estado .derecha { margin-left: auto; }
+.estado a { color: var(--acento-2); }
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  .espacio { grid-template-columns: 1fr; }
+  .herramientas { flex-direction: row; flex-wrap: wrap; justify-content: center; border: 0; }
+  .propiedades { border: 0; }
+  .estado .derecha { display: none; }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PhotoStudio Lite</title>
+    <meta name="description" content="Editor de dibujo e imagen en el navegador con Canvas: pinceles, formas, bote de pintura, filtros, capas de deshacer y exportación a PNG." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <header class="barra">
+      <div class="marca"><span class="logo">◐</span> PhotoStudio <em>Lite</em></div>
+      <div class="acciones">
+        <button data-accion="nuevo" title="Lienzo nuevo">＋ Nuevo</button>
+        <label class="boton-archivo" title="Abrir imagen (o arrastra una al lienzo)">📂 Abrir<input type="file" id="abrir" accept="image/*" hidden /></label>
+        <span class="separador"></span>
+        <button data-accion="deshacer" title="Deshacer (Ctrl+Z)" aria-label="Deshacer">↶</button>
+        <button data-accion="rehacer" title="Rehacer (Ctrl+Y)" aria-label="Rehacer">↷</button>
+        <span class="separador"></span>
+        <button data-accion="guardar" class="principal" title="Guardar como PNG (Ctrl+S)">💾 Guardar PNG</button>
+      </div>
+    </header>
+
+    <div class="espacio">
+      <!-- Herramientas -->
+      <nav class="herramientas" aria-label="Herramientas">
+        <button data-herramienta="pincel" class="activa" title="Pincel (B)">🖌️</button>
+        <button data-herramienta="goma" title="Goma (E)">🩹</button>
+        <button data-herramienta="linea" title="Línea (L)">╱</button>
+        <button data-herramienta="rectangulo" title="Rectángulo (R)">▭</button>
+        <button data-herramienta="elipse" title="Elipse (O)">◯</button>
+        <button data-herramienta="bote" title="Bote de pintura (G)">🪣</button>
+        <button data-herramienta="cuentagotas" title="Cuentagotas (I)">💧</button>
+        <button data-herramienta="texto" title="Texto (T)">T</button>
+      </nav>
+
+      <!-- Lienzo -->
+      <main class="area" id="area">
+        <div class="lienzos" id="lienzos">
+          <canvas id="lienzo" width="1000" height="640"></canvas>
+          <canvas id="vista" width="1000" height="640"></canvas>
+        </div>
+        <div class="soltar" id="soltar">Suelta la imagen para abrirla</div>
+      </main>
+
+      <!-- Propiedades -->
+      <aside class="propiedades">
+        <section>
+          <h3>Color</h3>
+          <div class="color-actual">
+            <input type="color" id="color" value="#7c3aed" />
+            <code id="hex">#7C3AED</code>
+          </div>
+          <div class="paleta" id="paleta"></div>
+        </section>
+
+        <section>
+          <h3>Trazo</h3>
+          <label><span>Grosor <b id="v-grosor">8 px</b></span><input type="range" id="grosor" min="1" max="80" value="8" /></label>
+          <label><span>Opacidad <b id="v-opacidad">100 %</b></span><input type="range" id="opacidad" min="5" max="100" value="100" /></label>
+          <label class="interruptor"><input type="checkbox" id="relleno" /> Formas con relleno</label>
+          <label class="interruptor"><input type="checkbox" id="suavizado" checked /> Pincel suavizado</label>
+        </section>
+
+        <section>
+          <h3>Filtros</h3>
+          <div class="filtros">
+            <button data-filtro="grayscale(1)">Blanco y negro</button>
+            <button data-filtro="sepia(1)">Sepia</button>
+            <button data-filtro="invert(1)">Invertir</button>
+            <button data-filtro="blur(2px)">Desenfocar</button>
+            <button data-filtro="brightness(1.2)">+ Brillo</button>
+            <button data-filtro="contrast(1.3)">+ Contraste</button>
+            <button data-filtro="saturate(1.6)">+ Saturación</button>
+            <button data-filtro="hue-rotate(60deg)">Girar tono</button>
+          </div>
+        </section>
+
+        <p class="atajos">Atajos: <kbd>B</kbd> pincel · <kbd>E</kbd> goma · <kbd>L</kbd> línea · <kbd>R</kbd> rectángulo · <kbd>O</kbd> elipse · <kbd>G</kbd> bote · <kbd>I</kbd> cuentagotas · <kbd>T</kbd> texto · <kbd>[</kbd> <kbd>]</kbd> grosor</p>
+      </aside>
+    </div>
+
+    <footer class="estado">
+      <span id="estado-herramienta">Pincel</span>
+      <span id="estado-pos">—</span>
+      <span>1000 × 640 px</span>
+      <span class="derecha">Andrés Ramírez · <a href="https://github.com/Ramizzz8/photostudio-lite">GitHub</a></span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
